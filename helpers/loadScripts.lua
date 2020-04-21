@@ -1,5 +1,4 @@
 -- automatically fill scripts variable with userscripts.
-local requirements = {}
 
 local function load_script(url, scripts, reload)
     local a = scripts
@@ -21,7 +20,6 @@ local function load_script(url, scripts, reload)
         package.loaded[url] = url
     end
     b[last_word] = require(url)
-
 end
 
 local function recursiveEnumerate(folder, fileTree, first, scripts, reload)
@@ -40,22 +38,8 @@ local function recursiveEnumerate(folder, fileTree, first, scripts, reload)
     return fileTree
 end
 
-local rl = function()
-    recursiveEnumerate("scripts", "", true)
-end
-RELOADALL = function()
-    un_require()
-    print(" GAME LOGIC RESET")
-
-    rl()
-
-    scripts.systems.collision.collision.functions.reset()
-    for k, v in pairs(E.A) do
-        core.filter.update(v)
-    end
-end
 return function(basePath)
-    local scripts
+    local scripts = {}
     scripts.reloadAll = function()
         recursiveEnumerate(basePath, "", true, scripts, true)
     end
