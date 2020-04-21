@@ -17,4 +17,20 @@ Negations are also possible in front of filters (using the ```-``` symbol)
 ## Systems
 Systems are a way to allow some more finegrained control over game flow. The normally prefered way within this engine is to handle lists of entities, and work from there (in straightforward procedural code).
 
-However, there are situations where you want to respond to an entity getting added to the game, or other things like this. 
+However, there are situations where you want to respond to an entity getting added to the game, or other things like this.
+
+This is a boring example of a system:
+```
+local testSystem = {}
+testSystem.registers = {}
+testSystem.unregisters= {}
+testSystem.registers["A"]=function(entity)
+    print(entity)
+end
+testSystem.unregisters["A"]=function(entity)
+    print(entity)
+end
+```
+
+### Built-in Systems
+The Jam Engine will ship with some built-in systems. None of this is written yet though.
