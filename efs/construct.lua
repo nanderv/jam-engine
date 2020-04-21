@@ -18,7 +18,7 @@ return function()
     system.pushEntityStack = entities.pushStack
     system.updateEntityForFilter = entities.updateEntityForFilter
     system.popEntityStack = entities.popStack
-
+    system.runOnEntitiesByFilter = entities.runOnEntitiesByFilter
     system.filters = {}
     system.filteredEntities = {}
 
