@@ -1,4 +1,5 @@
 local e = {}
+
 function e:addEntity(entity)
 
     local frame = self.entityStack[#self.entityStack]
@@ -99,17 +100,26 @@ function e:updateEntityForFilter(entity, filter)
         end
     end
 end
-function e:getFilterByName(name)
-    for _, v in pairs(self.filteredEntitiesAsLists[name]) do
+
+function e:getFilterByName(filterName)
+    for _, v in ipairs(self.filteredEntitiesAsLists[name]) do
         return v
     end
     return nil
 end
+
+function e:runOnEntitiesByFilter(filterName, functionToApply, data)
+    for _, v in ipairs(self.filteredEntitiesAsLists[filterName]) do
+        functionToApply(v, data)
+    end
+end
+
 function e:updateEntity(entity)
     for _, filter in pairs(self.filters) do
         self:updateEntityForFilter(entity, filter)
     end
 end
+
 function e:removeEntity(entity)
     for i = #self.entityStack, 1, -1 do
         local frame = self.entityStack[i]
@@ -137,13 +147,16 @@ function e:removeEntity(entity)
         end
     end
 end
+
 function e:pushStack()
     self.entityStack[#self.entityStack + 1] = {}
 end
+
 function e:popStack()
     for k, v in pairs(self.entityStack[#self.entityStack]) do
         core.entity.remove(v, k)
     end
     self.entityStack[#self.entityStack] = nil
 end
+
 return e
