@@ -43,5 +43,6 @@ return function(basePath)
     scripts.reloadAll = function()
         recursiveEnumerate(basePath, "", true, scripts, true)
     end
-    return recursiveEnumerate(basePath, "", true, scripts, false)
+    recursiveEnumerate(basePath, "", true, scripts, false)
+    return scripts
 end
